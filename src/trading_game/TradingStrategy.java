@@ -4,6 +4,9 @@ import game.DailyInput;
 import game.DailyOutput;
 import game.TradingManager;
 import game.BaseTradingStrategy;
+
+import java.util.ArrayList;
+
 import exceptions.InsufficientFundsException;
 import exceptions.InsufficientSharesException;
 
@@ -14,10 +17,12 @@ enum TradeStatus {
 }
 
 public class TradingStrategy extends BaseTradingStrategy {
-
+	private boolean TESTING_ENABLED = true;
+	ArrayList<Double> closePrices;
+	
 	public TradingStrategy (){
 		// Initialise any variables needed.
-
+		closePrices = new ArrayList<Double>();
 	}
 
 	@Override
@@ -32,6 +37,7 @@ public class TradingStrategy extends BaseTradingStrategy {
 
 		double delta = input.getClose() - input.getOpen();
 
+		/*
 		if (delta < sell) {
 			// share going down
 			output = tradingManager.sellAllShares(input);
@@ -49,24 +55,83 @@ public class TradingStrategy extends BaseTradingStrategy {
 			output = tradingManager.doNothing(input);
 			//testing
 			status = TradeStatus.HELD;
+		*/
+		
+		closePrices.add(input.getClose());
+		
+		//the average numbers
+		int smallN = 5;
+		int bigN = 12;
+		
+		if(input.getDay() > bigN){
+			//if the share is going down OR the average price in the last smallN days is lower than the last bigN
+			if (delta < -1 || getNDayAverage(smallN) < getNDayAverage(bigN)) {
+				output = tradingManager.sellAllShares(input);
+				//testing
+				status = TradeStatus.SOLD;
+
+			} else {
+				// share going up
+				output = tradingManager.buyMaxNumberOfShares(input);
+				//testing
+				status = TradeStatus.BOUGHT;
+
+			}
 		}
+		else{
+			if (delta < -1) {
+				// share going down
+				output = tradingManager.sellAllShares(input);
+				//testing
+				status = TradeStatus.SOLD;
+			} else {
+				// share going up
+				output = tradingManager.buyMaxNumberOfShares(input);
+				//testing
+				status = TradeStatus.BOUGHT;
+			}
+		}
+		
 
 
 		//test stuff
-		System.out.print("DAY " + input.getDay() + ": opening: " + input.getOpen() + ", close: " + input.getClose()
-		+ ", high: " + input.getHigh() + ", low: " + input.getLow());
-		switch(status){
-		case BOUGHT:
-			System.out.println("   BOUGHT");
-			break;
-		case SOLD:
-			System.out.println("   SOLD");
-			break;
-		case HELD:
-			System.out.println("   HELD");
-			break;
+		if(TESTING_ENABLED){
+			System.out.print("DAY " + input.getDay() + ": opening: " + input.getOpen() + ", close: " + input.getClose()
+			+ ", high: " + input.getHigh() + ", low: " + input.getLow());
+			switch(status){
+			case BOUGHT:
+				System.out.println("   BOUGHT");
+				break;
+			case SOLD:
+				System.out.println("   SOLD");
+				break;
+			case HELD:
+				System.out.println("   HELD");
+				break;
+			}
 		}
-
+		
 		return output;
 	}
+	
+	/*
+	 * This method will return the average for the last n days
+	 */
+	public Double getNDayAverage(int n){
+		Double output = 0.0;
+		int currentDay = closePrices.size();
+		if(currentDay < n){
+			return null;
+		}
+		else{ // we can calculate this
+			for(int i=currentDay; i > (currentDay - n); i--){
+				output = output + closePrices.get(i - 1);
+			}
+			output = output / n;
+
+		}
+		return output;
+	}
+	
+	
 }
