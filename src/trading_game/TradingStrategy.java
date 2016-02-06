@@ -17,9 +17,13 @@ enum TradeStatus {
 }
 
 public class TradingStrategy extends BaseTradingStrategy {
-	private boolean TESTING_ENABLED = true;
+
 	ArrayList<Double> closePrices;
 	
+	
+	// DEBUG turns on trade logging.
+	private final static boolean DEBUG = true;
+
 	public TradingStrategy (){
 		// Initialise any variables needed.
 		closePrices = new ArrayList<Double>();
@@ -95,7 +99,8 @@ public class TradingStrategy extends BaseTradingStrategy {
 
 
 		//test stuff
-		if(TESTING_ENABLED){
+		if (DEBUG) {
+			//test stuff
 			System.out.print("DAY " + input.getDay() + ": opening: " + input.getOpen() + ", close: " + input.getClose()
 			+ ", high: " + input.getHigh() + ", low: " + input.getLow());
 			switch(status){
@@ -122,6 +127,7 @@ public class TradingStrategy extends BaseTradingStrategy {
 		int currentDay = closePrices.size();
 		if(currentDay < n){
 			return null;
+
 		}
 		else{ // we can calculate this
 			for(int i=currentDay; i > (currentDay - n); i--){
