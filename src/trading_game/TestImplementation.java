@@ -7,7 +7,7 @@ import game.Game;
 public class TestImplementation {
 	public static void main(String[] args) throws GameFailureException {
 		
-		Game game = new Game("WINNING TEAM!", new TradingStrategyFactory());
+		Game game = new Game("Dartboard Monkey", new TradingStrategyFactory());
 		game.run();
 
 	}
