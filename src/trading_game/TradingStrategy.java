@@ -33,9 +33,9 @@ public class TradingStrategy extends BaseTradingStrategy {
 	public DailyOutput makeDailyTrade(DailyInput input) throws InsufficientFundsException, InsufficientSharesException {
 		
 		int smallN = 5;
-		int bigN = 12;
+		int bigN = 13; //unlucky for some...
 		final double buy = 0.4;
-		final double sell = -6;
+		final double sell = -8;
 		DailyOutput output;
 		TradeStatus status;
 
