@@ -40,26 +40,6 @@ public class TradingStrategy extends BaseTradingStrategy {
 
 
 		double delta = input.getClose() - input.getOpen();
-
-		/*
-		if (delta < sell) {
-			// share going down
-			output = tradingManager.sellAllShares(input);
-			//testing
-			status = TradeStatus.SOLD;
-
-		} else if (delta > buy) {
-			// share going up
-			output = tradingManager.buyMaxNumberOfShares(input);
-			//testing
-			status = TradeStatus.BOUGHT;
-
-		}
-		else{
-			output = tradingManager.doNothing(input);
-			//testing
-			status = TradeStatus.HELD;
-		*/
 		
 		closePrices.add(input.getClose());
 		
@@ -69,17 +49,21 @@ public class TradingStrategy extends BaseTradingStrategy {
 		
 		if(input.getDay() > bigN){
 			//if the share is going down OR the average price in the last smallN days is lower than the last bigN
-			if (delta < -1 || getNDayAverage(smallN) < getNDayAverage(bigN)) {
+			if (delta < sell || getNDayAverage(smallN) < getNDayAverage(bigN)) {
 				output = tradingManager.sellAllShares(input);
 				//testing
 				status = TradeStatus.SOLD;
 
-			} else {
+			} else if(delta > buy) {
 				// share going up
 				output = tradingManager.buyMaxNumberOfShares(input);
 				//testing
 				status = TradeStatus.BOUGHT;
 
+			}
+			else{
+				output = tradingManager.doNothing(input);
+				status = TradeStatus.HELD;
 			}
 		}
 		else{
@@ -103,6 +87,7 @@ public class TradingStrategy extends BaseTradingStrategy {
 			//test stuff
 			System.out.print("DAY " + input.getDay() + ": opening: " + input.getOpen() + ", close: " + input.getClose()
 			+ ", high: " + input.getHigh() + ", low: " + input.getLow());
+			
 			switch(status){
 			case BOUGHT:
 				System.out.println("   BOUGHT");
