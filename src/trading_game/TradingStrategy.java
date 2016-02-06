@@ -9,7 +9,8 @@ import exceptions.InsufficientSharesException;
 
 enum TradeStatus {
 	BOUGHT,
-	SOLD
+	SOLD,
+	HELD
 }
 
 public class TradingStrategy extends BaseTradingStrategy {
@@ -23,25 +24,31 @@ public class TradingStrategy extends BaseTradingStrategy {
 	public DailyOutput makeDailyTrade(DailyInput input) throws InsufficientFundsException, InsufficientSharesException {
 
 		// Use the trading manager to make trades based on input.
-
+		final double buy = -0.9;
+		final double sell = -1.1;
 		DailyOutput output;
 		TradeStatus status;
 
 
 		double delta = input.getClose() - input.getOpen();
 
-		if (delta < -1) {
+		if (delta < sell) {
 			// share going down
 			output = tradingManager.sellAllShares(input);
 			//testing
 			status = TradeStatus.SOLD;
 
-		} else {
+		} else if (delta > buy) {
 			// share going up
 			output = tradingManager.buyMaxNumberOfShares(input);
 			//testing
 			status = TradeStatus.BOUGHT;
 
+		}
+		else{
+			output = tradingManager.doNothing(input);
+			//testing
+			status = TradeStatus.HELD;
 		}
 
 
@@ -55,7 +62,9 @@ public class TradingStrategy extends BaseTradingStrategy {
 		case SOLD:
 			System.out.println("   SOLD");
 			break;
-
+		case HELD:
+			System.out.println("   HELD");
+			break;
 		}
 
 		return output;
