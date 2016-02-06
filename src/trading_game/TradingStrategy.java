@@ -35,7 +35,7 @@ public class TradingStrategy extends BaseTradingStrategy {
 		int smallN = 5;
 		int bigN = 12;
 		final double buy = 0.4;
-		final double sell = -6;
+		final double sell = -8;
 		DailyOutput output;
 		TradeStatus status;
 
