@@ -7,58 +7,57 @@ import game.BaseTradingStrategy;
 import exceptions.InsufficientFundsException;
 import exceptions.InsufficientSharesException;
 
-public class TradingStrategy extends BaseTradingStrategy {		
-	
+enum TradeStatus {
+	BOUGHT,
+	SOLD
+}
+
+public class TradingStrategy extends BaseTradingStrategy {
+
 	public TradingStrategy (){
 		// Initialise any variables needed.
-		
+
 	}
-	
+
 	@Override
 	public DailyOutput makeDailyTrade(DailyInput input) throws InsufficientFundsException, InsufficientSharesException {
-		
+
 		// Use the trading manager to make trades based on input.
-		
+
 		DailyOutput output;
-		int sold;//0 if nothing 1 if sold 2 if bought
-		
+		TradeStatus status;
+
+
 		double delta = input.getClose() - input.getOpen();
-		
-		if (delta > 0) {
-			// share going up
-			output = tradingManager.buyMaxNumberOfShares(input);
-			//testing
-			sold = 2;
-			
-		}
-		else if(delta < 0){
+
+		if (delta < -1) {
 			// share going down
 			output = tradingManager.sellAllShares(input);
 			//testing
-			sold = 1;
+			status = TradeStatus.SOLD;
+
+		} else {
+			// share going up
+			output = tradingManager.buyMaxNumberOfShares(input);
+			//testing
+			status = TradeStatus.BOUGHT;
+
 		}
-		//just for testing
-		else{
-			output = tradingManager.doNothing(input);
-			sold = 0;
-		}
-		//do nothing if the shares haven't changed
-		
+
+
 		//test stuff
 		System.out.print("DAY " + input.getDay() + ": opening: " + input.getOpen() + ", close: " + input.getClose()
-				+ ", high: " + input.getHigh() + ", low: " + input.getLow());
-		switch(sold){
-		case 2:
+		+ ", high: " + input.getHigh() + ", low: " + input.getLow());
+		switch(status){
+		case BOUGHT:
 			System.out.println("   BOUGHT");
 			break;
-		case 1:
+		case SOLD:
 			System.out.println("   SOLD");
 			break;
-		case 0:
-			System.out.println();
-			break;
+
 		}
-		
+
 		return output;
 	}
 }
