@@ -9,6 +9,5 @@ public class TestImplementation {
 		
 		Game game = new Game("WINNING TEAM!", new TradingStrategyFactory());
 		game.run();
-
 	}
 }
