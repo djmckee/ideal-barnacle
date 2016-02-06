@@ -31,10 +31,11 @@ public class TradingStrategy extends BaseTradingStrategy {
 
 	@Override
 	public DailyOutput makeDailyTrade(DailyInput input) throws InsufficientFundsException, InsufficientSharesException {
-
-		// Use the trading manager to make trades based on input.
-		final double buy = -0.9;
-		final double sell = -1.1;
+		
+		int smallN = 5;
+		int bigN = 12;
+		final double buy = -0.58;
+		final double sell = -1.45;
 		DailyOutput output;
 		TradeStatus status;
 
@@ -42,10 +43,7 @@ public class TradingStrategy extends BaseTradingStrategy {
 		double delta = input.getClose() - input.getOpen();
 		
 		closePrices.add(input.getClose());
-		
-		//the average numbers
-		int smallN = 5;
-		int bigN = 12;
+
 		
 		if(input.getDay() > bigN){
 			//if the share is going down OR the average price in the last smallN days is lower than the last bigN
