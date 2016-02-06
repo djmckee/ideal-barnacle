@@ -7,8 +7,8 @@ import game.BaseTradingStrategy;
 import exceptions.InsufficientFundsException;
 import exceptions.InsufficientSharesException;
 
-public class TradingStrategy extends BaseTradingStrategy {
-			
+public class TradingStrategy extends BaseTradingStrategy {		
+	
 	public TradingStrategy (){
 		// Initialise any variables needed.
 		
