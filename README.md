@@ -1,20 +1,15 @@
-# ideal-barnacle
-Scott Logic Coding Challenge
+Scott Logic Hackathon
+=======================
 
+At Scott Logic we run Hackathon events for students at various universities across the country, including Bristol, Durham and Newcastle. You can find out about the future events from our website (http://www.scottlogic.com/about/events/).
 
-## What is it?
-Write a program to buy and sell shares. The highest profit wins.
+The code in this repository is the 'starter' project for the hack, where students are asked to create an algorithm that makes automated trades against a dummy trading platform. The winner is the student who makes the most money!
 
-Two classes:
-- TradeManager - list of methods that can buy or sell shares
-- DailyInput - a list of methods that gets the share prices
-
-
-When you decide to buy or sell shares we make the sale or purchase using the close price.
-
-Starter project at [https://github.com/ScottLogic/Hackathon/tree/development](https://github.com/ScottLogic/Hackathon/tree/development) ** The `development` branch! **
-
-In Eclipse - right click, run as Java Application - prints results to the console.
-
-
-Email to: apolkinghorn@scottlogic.co.uk
+Competing students need to:
+* Download source as a zip and extract.
+* Open [Eclipse](http://www.eclipse.org/downloads/packages/eclipse-ide-java-developers/mars1) and right-click the Package Explorer.
+* Import -> General -> Existing Projects into Workspace.
+* Browse to unzipped project, select Hackathon. Click Finish.
+* Right click Hackathon/src/(default package)/TestImplementation -> Run As -> Java Application.
+* Fill in the Hackathon/src/trading/TradingStrategy to do trading.
+* Look at graphical version of the results in Hackathon/Output/hackathon.html.
