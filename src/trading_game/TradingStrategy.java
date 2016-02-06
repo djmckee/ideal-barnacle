@@ -24,25 +24,18 @@ public class TradingStrategy extends BaseTradingStrategy {
 		
 		double delta = input.getClose() - input.getOpen();
 		
-		if (delta > 0) {
+		if (delta < -1) {
+			// share going down
+						output = tradingManager.sellAllShares(input);
+						//testing
+						sold = 1;
+		} else {
 			// share going up
 			output = tradingManager.buyMaxNumberOfShares(input);
 			//testing
 			sold = 2;
-			
 		}
-		else if(delta < 0){
-			// share going down
-			output = tradingManager.sellAllShares(input);
-			//testing
-			sold = 1;
-		}
-		//just for testing
-		else{
-			output = tradingManager.doNothing(input);
-			sold = 0;
-		}
-		//do nothing if the shares haven't changed
+		
 		
 		//test stuff
 		System.out.print("DAY " + input.getDay() + ": opening: " + input.getOpen() + ", close: " + input.getClose()
