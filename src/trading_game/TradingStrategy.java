@@ -18,7 +18,7 @@ enum TradeStatus {
 
 public class TradingStrategy extends BaseTradingStrategy {
 
-	ArrayList<Double> closePrices;
+	private final ArrayList<Double> closePrices = new ArrayList<Double>();
 	
 	
 	// DEBUG turns on trade logging.
@@ -26,7 +26,7 @@ public class TradingStrategy extends BaseTradingStrategy {
 
 	public TradingStrategy (){
 		// Initialise any variables needed.
-		closePrices = new ArrayList<Double>();
+
 	}
 
 	@Override
