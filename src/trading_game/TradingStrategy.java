@@ -14,6 +14,9 @@ enum TradeStatus {
 }
 
 public class TradingStrategy extends BaseTradingStrategy {
+	
+	// DEBUG turns on trade logging.
+	private final static boolean DEBUG = true;
 
 	public TradingStrategy (){
 		// Initialise any variables needed.
@@ -52,19 +55,21 @@ public class TradingStrategy extends BaseTradingStrategy {
 		}
 
 
-		//test stuff
-		System.out.print("DAY " + input.getDay() + ": opening: " + input.getOpen() + ", close: " + input.getClose()
-		+ ", high: " + input.getHigh() + ", low: " + input.getLow());
-		switch(status){
-		case BOUGHT:
-			System.out.println("   BOUGHT");
-			break;
-		case SOLD:
-			System.out.println("   SOLD");
-			break;
-		case HELD:
-			System.out.println("   HELD");
-			break;
+		if (DEBUG) {
+			//test stuff
+			System.out.print("DAY " + input.getDay() + ": opening: " + input.getOpen() + ", close: " + input.getClose()
+			+ ", high: " + input.getHigh() + ", low: " + input.getLow());
+			switch(status){
+			case BOUGHT:
+				System.out.println("   BOUGHT");
+				break;
+			case SOLD:
+				System.out.println("   SOLD");
+				break;
+			case HELD:
+				System.out.println("   HELD");
+				break;
+			}
 		}
 
 		return output;
