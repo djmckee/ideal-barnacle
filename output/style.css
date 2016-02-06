@@ -1,0 +1,140 @@
+.banner {
+    height: 50px;
+    background: url('logo.png') no-repeat center center;
+    background-color: black;
+    margin-bottom: 20px;
+}
+
+.header {
+    font-size: 1.2rem;
+}
+
+.company {
+    font-size: 1rem;
+    padding: 1px 5px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+}
+
+.company:hover {
+    cursor: pointer;
+    background-color: white;
+    border: 1px solid lightsteelblue;
+}
+
+.company .name {
+    display: inline-block;
+    width: 15%;
+}
+
+.company .bar {
+    display: inline-block;
+}
+
+.company .bar .inner {
+    height: 10px;
+    border: 1px solid grey;
+    background-color: lightgrey;
+}
+
+.company:hover .bar .inner {
+    border: 1px solid steelblue;
+    background-color: lightsteelblue;
+}
+
+.company .value {
+    display: inline-block;
+    width: 10%;
+    text-align: right;
+}
+
+.highlight {
+    text-align: center;
+    font-size: 0.8rem;
+    margin-top: 15px;
+}
+
+.chart {
+    margin: 0 auto;
+    width: 900px;
+}
+
+.chart text {
+    font: 10px sans-serif;
+}
+
+.chart .domain,
+.chart .tick line {
+    fill: none;
+    stroke: black;
+}
+
+.chart .chart-line {
+    fill: none;
+    stroke-width: 2px;
+}
+
+.chart .chart-line.total {
+    stroke: steelblue;
+    stroke-width: 2px;
+}
+
+.chart .chart-line.funds {
+    stroke: red;
+    stroke-width: 1px;
+    stroke-opacity: 0.6;
+}
+
+.chart .chart-area {
+    fill: lightsteelblue;
+}
+
+.chart .bar path,
+.chart .bar rect {
+    stroke: grey;
+    fill: lightgrey;
+}
+
+.chart .bar.up-day path,
+.chart .bar.up-day rect {
+    stroke: darkgreen;
+    fill: green;
+}
+
+.chart .bar.down-day path,
+.chart .bar.down-day rect {
+    stroke: darkred;
+    fill: red;
+}
+
+.chart .crosshairs line {
+    fill: none;
+    stroke: black;
+    stroke-width: 1px;
+    stroke-opacity: 0.4;
+}
+
+.chart .crosshairs circle {
+    fill: none;
+    stroke: black;
+    stroke-width: 2px;
+    stroke-opacity: 0.4;
+}
+
+.chart .crosshairs text {
+    text-anchor: end;
+}
+
+.chart .crosshairs.frozen line,
+.chart .crosshairs.frozen circle {
+    stroke-opacity: 0.8;
+}
+
+.chart .overlay {
+    stroke-opacity: 0;
+    fill-opacity: 0;
+}
+
+hr {
+    margin: 0.8rem 0;
+}
