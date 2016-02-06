@@ -8,7 +8,7 @@ import exceptions.InsufficientFundsException;
 import exceptions.InsufficientSharesException;
 
 public class TradingStrategy extends BaseTradingStrategy {
-	
+			
 	public TradingStrategy (){
 		// Initialise any variables needed.
 		
@@ -20,10 +20,18 @@ public class TradingStrategy extends BaseTradingStrategy {
 		// Use the trading manager to make trades based on input.
 		
 		DailyOutput output;
-		if (input.getDay() % 2 == 0) {
+		
+		double delta = input.getClose() - input.getOpen();
+		
+		if (delta > 0) {
+			// share going up
 			output = tradingManager.buyMaxNumberOfShares(input);
+
+			
 		} else {
+			// share going down
 			output = tradingManager.sellAllShares(input);
+
 		}
 		
 		return output;
