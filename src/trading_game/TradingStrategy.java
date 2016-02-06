@@ -27,6 +27,7 @@ public class TradingStrategy extends BaseTradingStrategy {
 		DailyOutput output;
 		TradeStatus status;
 
+
 		double delta = input.getClose() - input.getOpen();
 
 		if (delta < -1) {
@@ -34,6 +35,7 @@ public class TradingStrategy extends BaseTradingStrategy {
 			output = tradingManager.sellAllShares(input);
 			//testing
 			status = TradeStatus.SOLD;
+
 		} else {
 			// share going up
 			output = tradingManager.buyMaxNumberOfShares(input);
